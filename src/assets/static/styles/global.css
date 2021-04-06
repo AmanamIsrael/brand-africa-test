@@ -12,6 +12,3 @@ body {
   background-color: #fff;
   color: var(--dark);
 }
-.text-primary {
-  color: var(--primary);
-}
