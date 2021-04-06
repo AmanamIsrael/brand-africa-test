@@ -2,29 +2,40 @@ import home from "@/pages/home/index";
 import test from "@/pages/test/index";
 import summary from "@/pages/summary/index";
 import notFound from "@/pages/notfound/index";
+import store from "@/store/index";
 
-//guard test route
-
-// function guardRoutes(to, from, next) {
-//     const token = localStorage.getItem("auth-token");
-//     if (token) {
-//       next();
-//     } else {
-//       next("/");
-//     }
-//   }
+function guardRoutes(to, from, next) {
+  const userHasEnteredInfo = store.state.userHasEnteredInfo;
+  if (userHasEnteredInfo) {
+    next();
+  } else {
+    next("/");
+  }
+}
 
 const routes = [
-  { path: "", component: home },
+  {
+    path: "",
+    component: home,
+    meta: {
+      title: "Home",
+    },
+  },
   {
     path: "/test",
     component: test,
-    //   beforeEnter: guardRoutes,
+    beforeEnter: guardRoutes,
+    meta: {
+      title: "Test",
+    },
   },
   {
     path: "/summary",
     component: summary,
-    //   beforeEnter: guardRoutes,
+    beforeEnter: guardRoutes,
+    meta: {
+      title: "Summary",
+    },
   },
   { path: "*", component: notFound },
 ];

@@ -12,4 +12,5 @@ export default {
 </script>
 
 <style>
+@import url("./assets/static/styles/global.css");
 </style>
