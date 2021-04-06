@@ -1,3 +1,4 @@
+import Vue from "vue";
 import home from "@/pages/home/index";
 import test from "@/pages/test/index";
 import summary from "@/pages/summary/index";
@@ -10,6 +11,10 @@ function guardRoutes(to, from, next) {
     next();
   } else {
     next("/");
+    Vue.swal({
+      title: "Please Fill Your Details",
+      confirmButtonText: "alright!",
+    });
   }
 }
 
