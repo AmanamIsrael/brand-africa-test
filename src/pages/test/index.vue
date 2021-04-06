@@ -24,6 +24,39 @@
                       West Bromwich Albion
                     </label>
                   </div>
+                  <div class="option mb-3">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="option"
+                      id="option2"
+                    />
+                    <label class="ms-3 form-check-label" for="option2">
+                      West Bromwich Albion
+                    </label>
+                  </div>
+                  <div class="option mb-3">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="option"
+                      id="option3"
+                    />
+                    <label class="ms-3 form-check-label" for="option3">
+                      West Bromwich Albion
+                    </label>
+                  </div>
+                  <div class="option mb-3">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="option"
+                      id="option4"
+                    />
+                    <label class="ms-3 form-check-label" for="option4">
+                      West Bromwich Albion
+                    </label>
+                  </div>
                   <button type="submit" class="p-3 w-100 btn btn-primary">
                     Next question
                   </button>
@@ -44,7 +77,7 @@ export default {
   name: "test",
   data() {
     return {
-      allQuestions: data().data,
+      allQuestions: data(),
       answeredQuestions: {},
       timer: 120,
     };
