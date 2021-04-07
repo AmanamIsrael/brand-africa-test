@@ -95,7 +95,7 @@ export default {
       }
       this.currQuestion.selectedChoice = this.currChoice;
       this.getCurrIndex() === this.allQuestions.length - 2
-        ? (this.buttonState = "Submit Text")
+        ? (this.buttonState = "Submit Test")
         : false;
       if (
         this.getCurrIndex() &&
