@@ -5,6 +5,7 @@
         class="wrapper d-flex flex-column justify-content-center align-items-center"
       >
         <h1 class="text-primary mb-3 fw-bold">Test Summary</h1>
+        <router-link to="/"><p class="fs-6">back Home</p></router-link>
         <div class="card border-0">
           <div class="card-body text-center">
             <div class="card mb-3">
