@@ -1,5 +1,16 @@
 <template>
-  <div>oops!, page not found</div>
+  <main>
+    <div
+      class="wrapper w-100 d-flex flex-column justify-content-center align-items-center"
+    >
+      <div class="card border-0">
+        <div class="card-body text-center">
+          <p class="fs-3 m-0 fw-bold">Page Not Found!</p>
+          <router-link to="/">Go Home</router-link>
+        </div>
+      </div>
+    </div>
+  </main>
 </template>
 
 <script>
@@ -8,5 +19,12 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
+<style scoped>
+div.wrapper {
+  height: 100vh;
+}
+.wrapper > .card {
+  max-width: 600px;
+  height: auto;
+}
 </style>
