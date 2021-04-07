@@ -405,7 +405,7 @@ function data() {
       },
     ],
   };
-  return jsonData.data;
+  return jsonData;
 }
 
 export default data;

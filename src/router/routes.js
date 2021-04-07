@@ -1,11 +1,11 @@
 import Vue from "vue";
 import home from "@/pages/home/index";
 import test from "@/pages/test/index";
-import summary from "@/pages/summary/index";
+import summaryPage from "@/pages/summary/index";
 import notFound from "@/pages/notfound/index";
 import store from "@/store/index";
 
-function guardRoutes(to, from, next) {
+function guardCheckInfo(to, from, next) {
   const userHasEnteredInfo = store.state.userHasEnteredInfo;
   if (userHasEnteredInfo) {
     next();
@@ -13,6 +13,19 @@ function guardRoutes(to, from, next) {
     next("/");
     Vue.swal({
       title: "Please Fill Your Details",
+      confirmButtonText: "alright!",
+    });
+  }
+}
+function guardCheckTakenTest(to, from, next) {
+  const userHasTakenTest = store.state.isUserHasTakenTest;
+
+  if (userHasTakenTest) {
+    next();
+  } else {
+    next("/");
+    Vue.swal({
+      title: "You didnt take your text",
       confirmButtonText: "alright!",
     });
   }
@@ -29,15 +42,15 @@ const routes = [
   {
     path: "/test",
     component: test,
-    beforeEnter: guardRoutes,
+    beforeEnter: guardCheckInfo,
     meta: {
       title: "Test",
     },
   },
   {
     path: "/summary",
-    component: summary,
-    beforeEnter: guardRoutes,
+    component: summaryPage,
+    beforeEnter: guardCheckTakenTest,
     meta: {
       title: "Summary",
     },

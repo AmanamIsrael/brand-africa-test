@@ -8,57 +8,29 @@
           <p class="fs-5 text-right">{{ timer }}s remaining</p>
           <div class="card">
             <div class="card-body">
-              <form @submit.prevent="answered">
+              <form @submit.prevent="nextQuestion">
                 <p class="fs-3 text-center mb-3">
-                  The Stadium of Light is home to which English football club?
+                  {{ currQuestion.question }}
                 </p>
                 <div class="container-fluid">
-                  <div class="option mb-3">
+                  <div
+                    class="option mb-3"
+                    v-for="option in currQuestion.choices"
+                    :key="option.id"
+                  >
                     <input
                       class="form-check-input"
                       type="radio"
                       name="option"
-                      id="option1"
+                      :id="option.id"
+                      @click="getChoice(option)"
                     />
-                    <label class="ms-3 form-check-label" for="option1">
-                      West Bromwich Albion
-                    </label>
-                  </div>
-                  <div class="option mb-3">
-                    <input
-                      class="form-check-input"
-                      type="radio"
-                      name="option"
-                      id="option2"
-                    />
-                    <label class="ms-3 form-check-label" for="option2">
-                      West Bromwich Albion
-                    </label>
-                  </div>
-                  <div class="option mb-3">
-                    <input
-                      class="form-check-input"
-                      type="radio"
-                      name="option"
-                      id="option3"
-                    />
-                    <label class="ms-3 form-check-label" for="option3">
-                      West Bromwich Albion
-                    </label>
-                  </div>
-                  <div class="option mb-3">
-                    <input
-                      class="form-check-input"
-                      type="radio"
-                      name="option"
-                      id="option4"
-                    />
-                    <label class="ms-3 form-check-label" for="option4">
-                      West Bromwich Albion
+                    <label class="ms-3 form-check-label" :for="option.id">
+                      {{ option.choice }}
                     </label>
                   </div>
                   <button type="submit" class="p-3 w-100 btn btn-primary">
-                    Next question
+                    {{ buttonState }}
                   </button>
                 </div>
               </form>
@@ -77,28 +49,75 @@ export default {
   name: "test",
   data() {
     return {
-      allQuestions: data(),
-      answeredQuestions: {},
+      buttonState: "Next question",
+      questionsData: data(),
+      allQuestions: data().data,
       timer: 120,
+      currQuestion: {},
+      currChoice: {},
+      score: 0,
+      questionsAnswered: 0,
     };
   },
-  computed: {},
   methods: {
     saveAnsweredQuestions() {
-      store.commit("setAnsweredQuestions", this.answeredQuestions);
+      store.commit("setAnsweredQuestions", this.questionsData);
+      this.$router.push("/summary");
     },
-    answered() {
-      console.log("answered");
+    getChoice(data) {
+      this.currQuestion.answered = true;
+      this.currChoice = data;
     },
-  },
-  created() {
-    console.log(this.allQuestions);
+    getCurrIndex() {
+      return this.allQuestions.findIndex(
+        (question) => this.currQuestion.id === question.id
+      );
+    },
+    nextQuestion() {
+      if (
+        this.currQuestion.answered &&
+        this.currChoice.is_correct_choice === 1
+      ) {
+        this.score = this.score + parseFloat(this.currQuestion.points);
+      }
+      console.log(this.score);
+      this.currQuestion.selectedChoice = this.currChoice;
+      this.getCurrIndex() === this.allQuestions.length - 2
+        ? (this.buttonState = "Submit Text")
+        : false;
+      if (
+        this.getCurrIndex() &&
+        this.getCurrIndex() === this.allQuestions.length - 1
+      ) {
+        this.submitQuestion();
+        return;
+      }
+      this.currQuestion = this.allQuestions[this.getCurrIndex() + 1];
+    },
+    submitQuestion() {
+      this.questionsData.score = this.score;
+      this.questionsData.data = this.allQuestions;
+      this.saveAnsweredQuestions();
+    },
   },
   mounted() {
+    this.currQuestion = this.allQuestions[0];
+    this.allQuestions.forEach((question) => {
+      question.answered = false;
+      question.selectedChoice = {};
+    });
+    console.log(this.allQuestions, this.questionsData);
     const setTimer = setInterval(() => {
       if (this.timer === 0) {
-        console.log("finished");
         clearInterval(setTimer);
+        this.$swal({
+          title: "Your time is up!🤝",
+          confirmButtonText: "Okay!",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.submitQuestion();
+          }
+        });
         return;
       }
       this.timer -= 1;
@@ -113,7 +132,6 @@ export default {
 }
 div.card {
   max-width: 600px;
-  width: auto;
 }
 .option {
   background-color: aliceblue;

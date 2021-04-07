@@ -81,6 +81,6 @@ export default {
   height: 100vh;
 }
 div.card {
-  width: 400px;
+  min-width: 400px;
 }
 </style>
