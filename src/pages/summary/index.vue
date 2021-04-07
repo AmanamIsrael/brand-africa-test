@@ -22,7 +22,7 @@
                   Total Number of Questions Answered
                 </p>
                 <p class="text-success fs-3 fw-bold mb-0">
-                  {{ getNoOfAnsweredQuestions }}/{{
+                  {{ getNoOfAnsweredQuestions - 1 }}/{{
                     this.allQuestions.data.length - 1
                   }}
                 </p>
