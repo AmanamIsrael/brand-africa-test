@@ -1,4 +1,8 @@
-# brand-africa-test
+# brand-africa Test Assesment
+
+## Technology used for development
+- VueJS [documentation](https://vuejs.org)
+- Bootstrap [documentation](https://getbootstrap.com/docs)
 
 ## Project setup
 ```
@@ -9,16 +13,22 @@ npm install
 ```
 npm run serve
 ```
+### Questions Answered
+1. What would you do differently to make the application scalable?
+ANSWER: 
+- I would break some of the test functions into reusable components and services.
+- I would store user score and progress on a server. 
 
-### Compiles and minifies for production
-```
-npm run build
-```
+2. In a different environment or if you were given more time, what will you do differently?
+ANSWER: 
+- I would Build a more pleasant user interface.
+- I would add a feature where a user can delete one wrong answer. As a one time feature.
+- I would save user test current state on an api incase the user is to come back to take it later.
 
-### Lints and fixes files
-```
-npm run lint
-```
+### How to Deploy with netlify
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+1. Visit [Netlify](http://netlify.com) and create an account that is connected to your github account.
+2. Create a new site and add project from github.
+3. Use build command npm run build.
+4. Set project directory to dist.
+5. Click Deploy site
