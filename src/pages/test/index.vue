@@ -5,8 +5,8 @@
         class="wrapper d-flex flex-column justify-content-center align-items-center"
       >
         <div>
-          <p class="fs-5 text-right">{{ timer }}s remaining</p>
-          <div class="card">
+          <p class="fs-6 text-center">{{ timer }}s remaining</p>
+          <div class="card border-0">
             <div class="card-body">
               <form @submit.prevent="nextQuestion">
                 <p class="fs-3 text-center mb-3">
@@ -17,6 +17,7 @@
                     class="option mb-3"
                     v-for="option in currQuestion.choices"
                     :key="option.id"
+                    @click="select(option.id)"
                   >
                     <input
                       class="form-check-input"
@@ -25,7 +26,11 @@
                       :id="option.id"
                       @click="getChoice(option)"
                     />
-                    <label class="ms-3 form-check-label" :for="option.id">
+                    <label
+                      class="ms-3 form-check-label"
+                      :id="option.id"
+                      :for="option.id"
+                    >
                       {{ option.choice }}
                     </label>
                   </div>
@@ -61,6 +66,10 @@ export default {
     };
   },
   methods: {
+    select(id) {
+      const label = document.getElementById(id);
+      label.click();
+    },
     saveAnsweredQuestions() {
       store.commit("setAnsweredQuestions", this.questionsData);
       this.$router.push("/summary");
@@ -108,7 +117,6 @@ export default {
       question.answered = false;
       question.selectedChoice = {};
     });
-    console.log(this.allQuestions, this.questionsData);
     const setTimer = window.setInterval(() => {
       if (this.timer === 0) {
         clearInterval(setTimer);
@@ -145,5 +153,9 @@ div.card {
   background-color: aliceblue;
   padding: 2em;
   border-radius: 5px;
+  cursor: pointer;
+}
+.option > label {
+  cursor: pointer;
 }
 </style>
