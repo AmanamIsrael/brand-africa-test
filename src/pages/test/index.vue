@@ -5,7 +5,10 @@
         class="wrapper d-flex flex-column justify-content-center align-items-center"
       >
         <div>
-          <p class="fs-6 text-center">{{ timer }}s remaining</p>
+          <p class="fs-6 text-center text-success">{{ timer }}s remaining</p>
+          <p class="fs-5 text-center">
+            Question: {{ getCurrIndex() + 1 }}/{{ allQuestions.length }}
+          </p>
           <div class="card border-0">
             <div class="card-body">
               <form @submit.prevent="nextQuestion">
@@ -90,7 +93,6 @@ export default {
       ) {
         this.score = this.score + parseFloat(this.currQuestion.points);
       }
-      console.log(this.score);
       this.currQuestion.selectedChoice = this.currChoice;
       this.getCurrIndex() === this.allQuestions.length - 2
         ? (this.buttonState = "Submit Text")
