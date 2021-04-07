@@ -5,7 +5,9 @@
         class="wrapper d-flex flex-column justify-content-center align-items-center"
       >
         <div>
-          <p class="fs-6 text-center text-success">{{ timer }}s remaining</p>
+          <p class="fs-6 fw-bold text-center text-primary">
+            {{ timer }}s remaining
+          </p>
           <p class="fs-5 text-center">
             Question: {{ getCurrIndex() + 1 }}/{{ allQuestions.length }}
           </p>
@@ -101,6 +103,7 @@ export default {
         this.getCurrIndex() &&
         this.getCurrIndex() === this.allQuestions.length - 1
       ) {
+        this.$swal("You have completed your test");
         this.submitQuestion();
         return;
       }

@@ -14,7 +14,10 @@
                 >
                 <input
                   type="text"
-                  v-model="userInfo.mobile"
+                  v-model.number="userInfo.mobile"
+                  minlength="3"
+                  maxlength="12"
+                  required
                   class="form-control"
                   id="mobile"
                 />
@@ -25,8 +28,9 @@
                 >
                 <select
                   id="country"
+                  required
                   class="form-select form-select-md"
-                  aria-label="Default select example"
+                  aria-label="country"
                   v-model="userInfo.country"
                 >
                   <option selected>Choose an option</option>
