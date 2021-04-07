@@ -57,6 +57,7 @@ export default {
       currChoice: {},
       score: 0,
       questionsAnswered: 0,
+      isState: false,
     };
   },
   methods: {
@@ -101,27 +102,34 @@ export default {
     },
   },
   mounted() {
+    this.isState = true;
     this.currQuestion = this.allQuestions[0];
     this.allQuestions.forEach((question) => {
       question.answered = false;
       question.selectedChoice = {};
     });
     console.log(this.allQuestions, this.questionsData);
-    const setTimer = setInterval(() => {
+    const setTimer = window.setInterval(() => {
       if (this.timer === 0) {
         clearInterval(setTimer);
         this.$swal({
           title: "Your time is up!🤝",
-          confirmButtonText: "Okay!",
-        }).then((result) => {
-          if (result.isConfirmed) {
-            this.submitQuestion();
-          }
+          showConfirmButton: false,
+          timer: 1000,
+          timerProgressBar: true,
+          willClose: () => {
+            if (this.isState) {
+              this.submitQuestion();
+            }
+          },
         });
         return;
       }
       this.timer -= 1;
     }, 1000);
+  },
+  destroyed() {
+    this.isState = false;
   },
 };
 </script>
