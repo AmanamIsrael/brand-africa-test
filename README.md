@@ -1,4 +1,4 @@
-# brand-africa Test Assesment
+# Brand Africa Frontend Engineer Test Assesment
 
 ## Technology used for development
 - VueJS [documentation](https://vuejs.org)
