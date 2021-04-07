@@ -108,10 +108,10 @@ export default {
       const inCorrect = questions.filter(
         (q) => q.selectedChoice.is_correct_choice === 0
       );
-      return inCorrect.length;
+      return inCorrect.length - 1;
     },
   },
-  mounted() {
+  created() {
     this.allQuestions = this.answeredQuestions;
   },
 };
