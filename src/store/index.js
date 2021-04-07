@@ -6,6 +6,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     userHasEnteredInfo: false,
+    isUserHasTakenTest: false,
     userInfo: {},
     answeredQuestions: {},
   },
@@ -16,6 +17,7 @@ export default new Vuex.Store({
     },
     setAnsweredQuestions(state, questions) {
       state.answeredQuestions = questions;
+      state.isUserHasTakenTest = true;
     },
   },
 });
