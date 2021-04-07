@@ -30,7 +30,7 @@
                   id="country"
                   required
                   class="form-select form-select-md"
-                  aria-label="Default select example"
+                  aria-label="country"
                   v-model="userInfo.country"
                 >
                   <option selected>Choose an option</option>
