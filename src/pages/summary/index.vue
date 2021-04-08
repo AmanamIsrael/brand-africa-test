@@ -22,8 +22,8 @@
                   Total Number of Questions Answered
                 </p>
                 <p class="text-success fs-3 fw-bold mb-0">
-                  {{ getNoOfAnsweredQuestions - 1 }}/{{
-                    this.allQuestions.data.length - 1
+                  {{ getNoOfAnsweredQuestions }}/{{
+                    this.allQuestions.data.length
                   }}
                 </p>
               </div>
@@ -33,7 +33,7 @@
                 <p class="mb-3 fw-bold fs-4">Total Number of Correct Answers</p>
                 <p class="text-success fs-3 fw-bold mb-0">
                   {{ getNoOfCorrectQuestions }}/{{
-                    this.allQuestions.data.length - 1
+                    this.allQuestions.data.length
                   }}
                 </p>
               </div>
@@ -45,7 +45,7 @@
                 </p>
                 <p class="text-success fs-3 fw-bold mb-0">
                   {{ getNoOfIncorrectQuestions }}/{{
-                    this.allQuestions.data.length - 1
+                    this.allQuestions.data.length
                   }}
                 </p>
               </div>
@@ -109,7 +109,7 @@ export default {
       const inCorrect = questions.filter(
         (q) => q.selectedChoice.is_correct_choice === 0
       );
-      return inCorrect.length - 1;
+      return inCorrect.length;
     },
   },
   created() {
